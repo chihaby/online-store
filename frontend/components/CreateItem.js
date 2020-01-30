@@ -3,14 +3,35 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
+import Error from './ErrorMessage';
+
+const CREATE_ITEM_MUTATION = gql`
+  mutation CREATE_ITEM_MUTATION(
+    $title: String!
+    $description: String!
+    $price: Int!
+    $image: String
+    $largeImage: String
+  ){
+    createItem(
+      title: $title
+      description: $description
+      price: $price
+      image: $image
+      largeImage: $largeImage
+    ){
+      id
+    }
+  }
+`;
 
 class CreateItem extends Component {
   state={
-    title: '',
-    description: '',
-    image: '',
-    largeImage: '',
-    price: 0
+    title: 'cool shoes',
+    description: 'I love those Context',
+    image: 'dog.jp',
+    largeImage: 'large-dog.jpg',
+    price: 5000
   }
 
   handleChange = event => {
@@ -21,8 +42,16 @@ class CreateItem extends Component {
 
   render() {
     return (
-      <Form>
-        <fieldset>
+      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
+        {(createItem, {loading, error}) => (
+
+      <Form onSubmit={async e => {
+        e.preventDefault();
+        const res = await createItem();
+        console.log(res)
+      }}>
+        <Error error={error} />
+        <fieldset disabled={loading} aria-busy={loading}>
           <label htmlFor='title'>
             Title
             <input 
@@ -33,7 +62,7 @@ class CreateItem extends Component {
               required
               value={this.state.title}
               onChange={this.handleChange}
-            />
+              />
           </label>
 
           <label htmlFor='price'>
@@ -46,7 +75,7 @@ class CreateItem extends Component {
               required
               value={this.state.price}
               onChange={this.handleChange}
-            />
+              />
           </label>
 
           <label htmlFor='description'>
@@ -58,14 +87,17 @@ class CreateItem extends Component {
               required
               value={this.state.description}
               onChange={this.handleChange}
-            />
+              />
           </label>
-
+          <button type="submit">Submit</button>
         </fieldset>
-        <h2>Sell an Item </h2>        
       </Form>
+
+      )}
+    </Mutation>
     );
   }
 }
 
 export default CreateItem;
+export { CREATE_ITEM_MUTATION };
