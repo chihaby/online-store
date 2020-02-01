@@ -1,0 +1,7 @@
+# endpoint: https://us1.prisma.sh/rad-chihaby/online-store/dev
+endpoint: ${env:PRISMA_ENDPOINT}
+datamodel: datamodel.graphql
+# secret: ${env:PRISMA_SECRET}
+hooks:
+  post-deploy: 
+    - graphql get-schema -p prisma
