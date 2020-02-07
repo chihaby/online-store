@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import NavStyles from './styles/NavStyles';
 import User from './User';
+import Signout from './Signout';
 
 const Nav = () => (
     <User>
@@ -20,7 +21,8 @@ const Nav = () => (
                     <Link href='/me'>
                         <a>Account</a>
                     </Link>   
-                </>
+                    <Signout />
+                </>             
             )} 
             {!me && (
                 <Link href='/signup'>
