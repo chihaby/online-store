@@ -1,4 +1,4 @@
-((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/signup.js"],{
+((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/reset.js"],{
 
 /***/ "./components/ErrorMessage.js":
 /*!************************************!*\
@@ -85,10 +85,10 @@ DisplayError.propTypes = {
 
 /***/ }),
 
-/***/ "./components/RequestReset.js":
-/*!************************************!*\
-  !*** ./components/RequestReset.js ***!
-  \************************************/
+/***/ "./components/Reset.js":
+/*!*****************************!*\
+  !*** ./components/Reset.js ***!
+  \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -102,10 +102,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _styles_Form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles/Form */ "./components/styles/Form.js");
-/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ErrorMessage */ "./components/ErrorMessage.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _styles_Form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles/Form */ "./components/styles/Form.js");
+/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ErrorMessage */ "./components/ErrorMessage.js");
+/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./User */ "./components/User.js");
 
-var _jsxFileName = "/Users/rad/Desktop/github/online-store/frontend/components/RequestReset.js";
+var _jsxFileName = "/Users/rad/Desktop/github/online-store/frontend/components/Reset.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -132,7 +135,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  mutation REQUEST_RESET_MUTATION($email: String!){\n    requestReset(email: $email) {\n      message\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation RESET_MUTATION($resetToken: String!, $password: String!, $confirmPassword: String!){\n    resetPassword(\n      resetToken: $resetToken, \n      password: $password,\n      confirmPassword: $confirmPassword\n      ) {\n        id\n        email\n        name\n      }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -148,28 +151,31 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var REQUEST_RESET_MUTAION = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject());
 
-var RequestReset =
+
+var RESET_MUTAION = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject());
+
+var Reset =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(RequestReset, _Component);
+  _inherits(Reset, _Component);
 
-  function RequestReset() {
+  function Reset() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, RequestReset);
+    _classCallCheck(this, Reset);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(RequestReset)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Reset)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      email: ''
+      password: '',
+      confirmPassword: ''
     });
 
     _defineProperty(_assertThisInitialized(_this), "saveToState", function (e) {
@@ -179,24 +185,31 @@ function (_Component) {
     return _this;
   }
 
-  _createClass(RequestReset, [{
+  _createClass(Reset, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Mutation"], {
-        mutation: REQUEST_RESET_MUTAION,
-        variables: this.state,
+        mutation: RESET_MUTAION,
+        variables: {
+          resetToken: this.props.resetToken,
+          password: this.state.password,
+          confirmPassword: this.state.confirmPassword
+        },
+        refetchQueries: [{
+          query: _User__WEBPACK_IMPORTED_MODULE_7__["CURRENT_USER_QUERY"]
+        }],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 37
         },
         __self: this
       }, function (reset, _ref) {
         var error = _ref.error,
             loading = _ref.loading,
             called = _ref.called;
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_Form__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_Form__WEBPACK_IMPORTED_MODULE_5__["default"], {
           method: "post",
           onSubmit:
           /*#__PURE__*/
@@ -214,7 +227,8 @@ function (_Component) {
 
                     case 3:
                       _this2.setState({
-                        email: ''
+                        password: '',
+                        confirmPassword: ''
                       });
 
                     case 4:
@@ -231,7 +245,7 @@ function (_Component) {
           }(),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 47
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("fieldset", {
@@ -239,544 +253,78 @@ function (_Component) {
           "aria-busy": loading,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 38
+            lineNumber: 58
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 39
+            lineNumber: 59
           },
           __self: this
-        }, "Request a password reset"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ErrorMessage__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        }, "Reset Your Password"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ErrorMessage__WEBPACK_IMPORTED_MODULE_6__["default"], {
           error: error,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 40
+            lineNumber: 60
           },
           __self: this
-        }), !error && !loading && called && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          htmlFor: "password",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 41
+            lineNumber: 62
           },
           __self: this
-        }, "Success! Check your email for a reset link! "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          htmlFor: "email",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 42
-          },
-          __self: this
-        }, "Email", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "email",
-          name: "email",
-          placeholder: "email",
-          value: _this2.state.email,
+        }, "Password", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "password",
+          name: "password",
+          placeholder: "password",
+          value: _this2.state.password,
           onChange: _this2.saveToState,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 64
+          },
+          __self: this
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          htmlFor: "confirmPassword",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 73
+          },
+          __self: this
+        }, "Confirm Password", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "password",
+          name: "confirmPassword",
+          placeholder: "confirmPassword",
+          value: _this2.state.confirmPassword,
+          onChange: _this2.saveToState,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 75
           },
           __self: this
         })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "submit",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 84
           },
           __self: this
-        }, "Request Reset!")));
+        }, "Reset Your Password")));
       });
     }
   }]);
 
-  return RequestReset;
+  return Reset;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RequestReset);
-
-/***/ }),
-
-/***/ "./components/Signin.js":
-/*!******************************!*\
-  !*** ./components/Signin.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-apollo */ "./node_modules/react-apollo/react-apollo.browser.umd.js");
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _styles_Form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles/Form */ "./components/styles/Form.js");
-/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ErrorMessage */ "./components/ErrorMessage.js");
-/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./User */ "./components/User.js");
-
-var _jsxFileName = "/Users/rad/Desktop/github/online-store/frontend/components/Signin.js";
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  mutation SIGNIN_MUTATION($email: String!, $password: String!){\n    signin(email: $email, password: $password) {\n      id\n      email\n      name\n    }\n  }\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-
-
-
-
-
-
-var SIGNIN_MUTAION = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject());
-
-var Signin =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Signin, _Component);
-
-  function Signin() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Signin);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Signin)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      name: '',
-      email: '',
-      password: ''
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "saveToState", function (e) {
-      _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    });
-
-    return _this;
-  }
-
-  _createClass(Signin, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Mutation"], {
-        mutation: SIGNIN_MUTAION,
-        variables: this.state,
-        refetchQueries: [{
-          query: _User__WEBPACK_IMPORTED_MODULE_6__["CURRENT_USER_QUERY"]
-        }],
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 30
-        },
-        __self: this
-      }, function (signup, _ref) {
-        var _React$createElement;
-
-        var error = _ref.error,
-            loading = _ref.loading;
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_Form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          method: "post",
-          onSubmit:
-          /*#__PURE__*/
-          function () {
-            var _ref2 = _asyncToGenerator(
-            /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      e.preventDefault();
-                      _context.next = 3;
-                      return signup();
-
-                    case 3:
-                      _this2.setState({
-                        name: '',
-                        email: '',
-                        password: ''
-                      });
-
-                    case 4:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
-            }));
-
-            return function (_x) {
-              return _ref2.apply(this, arguments);
-            };
-          }(),
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 36
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("fieldset", {
-          disabled: loading,
-          "aria-busy": loading,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 42
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 43
-          },
-          __self: this
-        }, "Sign In For An Account"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ErrorMessage__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          error: error,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 44
-          },
-          __self: this
-        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          htmlFor: "email",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 45
-          },
-          __self: this
-        }, "Email", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "email",
-          name: "email",
-          placeholder: "email",
-          value: _this2.state.email,
-          onChange: _this2.saveToState,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 47
-          },
-          __self: this
-        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          htmlFor: "password",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 56
-          },
-          __self: this
-        }, "Password", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", (_React$createElement = {
-          type: "password",
-          name: "password",
-          placeholder: "password",
-          value: _this2.state.password
-        }, _defineProperty(_React$createElement, "placeholder", "password"), _defineProperty(_React$createElement, "value", _this2.state.password), _defineProperty(_React$createElement, "onChange", _this2.saveToState), _defineProperty(_React$createElement, "__source", {
-          fileName: _jsxFileName,
-          lineNumber: 58
-        }), _defineProperty(_React$createElement, "__self", this), _React$createElement))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "submit",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 69
-          },
-          __self: this
-        }, "Sign In!")));
-      });
-    }
-  }]);
-
-  return Signin;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Signin);
-
-/***/ }),
-
-/***/ "./components/Signup.js":
-/*!******************************!*\
-  !*** ./components/Signup.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-apollo */ "./node_modules/react-apollo/react-apollo.browser.umd.js");
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _styles_Form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles/Form */ "./components/styles/Form.js");
-/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ErrorMessage */ "./components/ErrorMessage.js");
-/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./User */ "./components/User.js");
-
-var _jsxFileName = "/Users/rad/Desktop/github/online-store/frontend/components/Signup.js";
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!){\n    signup(email: $email, name: $name, password: $password) {\n      id\n      email\n      name\n    }\n  }\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-
-
-
-
-
-
-var SIGNUP_MUTAION = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject());
-
-var Signup =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Signup, _Component);
-
-  function Signup() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Signup);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Signup)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      name: '',
-      email: '',
-      password: ''
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "saveToState", function (e) {
-      _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    });
-
-    return _this;
-  }
-
-  _createClass(Signup, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Mutation"], {
-        mutation: SIGNUP_MUTAION,
-        variables: this.state,
-        refetchQueries: [{
-          query: _User__WEBPACK_IMPORTED_MODULE_6__["CURRENT_USER_QUERY"]
-        }],
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 30
-        },
-        __self: this
-      }, function (signup, _ref) {
-        var _React$createElement;
-
-        var error = _ref.error,
-            loading = _ref.loading;
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_Form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          method: "post",
-          onSubmit:
-          /*#__PURE__*/
-          function () {
-            var _ref2 = _asyncToGenerator(
-            /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      e.preventDefault();
-                      _context.next = 3;
-                      return signup();
-
-                    case 3:
-                      _this2.setState({
-                        name: '',
-                        email: '',
-                        password: ''
-                      });
-
-                    case 4:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
-            }));
-
-            return function (_x) {
-              return _ref2.apply(this, arguments);
-            };
-          }(),
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 36
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("fieldset", {
-          disabled: loading,
-          "aria-busy": loading,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 42
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 43
-          },
-          __self: this
-        }, "Sign Up For An Account"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ErrorMessage__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          error: error,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 44
-          },
-          __self: this
-        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          htmlFor: "email",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 45
-          },
-          __self: this
-        }, "Email", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "email",
-          name: "email",
-          placeholder: "email",
-          value: _this2.state.email,
-          onChange: _this2.saveToState,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 47
-          },
-          __self: this
-        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          htmlFor: "name",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 56
-          },
-          __self: this
-        }, "Name", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "text",
-          name: "name",
-          placeholder: "name",
-          value: _this2.state.name,
-          onChange: _this2.saveToState,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 58
-          },
-          __self: this
-        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          htmlFor: "password",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 67
-          },
-          __self: this
-        }, "Password", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", (_React$createElement = {
-          type: "password",
-          name: "password",
-          placeholder: "password",
-          value: _this2.state.password
-        }, _defineProperty(_React$createElement, "placeholder", "password"), _defineProperty(_React$createElement, "value", _this2.state.password), _defineProperty(_React$createElement, "onChange", _this2.saveToState), _defineProperty(_React$createElement, "__source", {
-          fileName: _jsxFileName,
-          lineNumber: 69
-        }), _defineProperty(_React$createElement, "__self", this), _React$createElement))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "submit",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 80
-          },
-          __self: this
-        }, "Sign Up!")));
-      });
-    }
-  }]);
-
-  return Signup;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Signup);
+_defineProperty(Reset, "propTypes", {
+  resetToken: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (Reset);
 
 /***/ }),
 
@@ -21055,10 +20603,10 @@ if (hasSymbols()) {
 
 /***/ }),
 
-/***/ "./pages/signup.js":
-/*!*************************!*\
-  !*** ./pages/signup.js ***!
-  \*************************/
+/***/ "./pages/reset.js":
+/*!************************!*\
+  !*** ./pages/reset.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21066,50 +20614,35 @@ if (hasSymbols()) {
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Signup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Signup */ "./components/Signup.js");
-/* harmony import */ var _components_Signin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Signin */ "./components/Signin.js");
-/* harmony import */ var _components_RequestReset__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/RequestReset */ "./components/RequestReset.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-var _jsxFileName = "/Users/rad/Desktop/github/online-store/frontend/pages/signup.js";
+/* harmony import */ var _components_Reset__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Reset */ "./components/Reset.js");
+var _jsxFileName = "/Users/rad/Desktop/github/online-store/frontend/pages/reset.js";
 
 
 
-
-
-var Columns = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
-  displayName: "signup__Columns",
-  componentId: "jf76qp-0"
-})(["display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));grid-gap:20px;"]);
-
-var SingupPage = function SingupPage(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Columns, {
+var Sell = function Sell(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 4
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Signup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 5
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Signin__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Reset your password ", props.query.resetToken), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Reset__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    resetToken: props.query.resetToken,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RequestReset__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 6
     },
     __self: this
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (SingupPage);
+/* harmony default export */ __webpack_exports__["default"] = (Sell);
     (function (Component, route) {
       if(!Component) return
       if (false) {}
@@ -21126,21 +20659,21 @@ var SingupPage = function SingupPage(props) {
           next.router.update(r, Component)
         }
       }
-    })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/signup")
+    })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/reset")
   
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
-/***/ 4:
-/*!*******************************!*\
-  !*** multi ./pages/signup.js ***!
-  \*******************************/
+/***/ 5:
+/*!******************************!*\
+  !*** multi ./pages/reset.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__NEXT_REGISTER_PAGE('/signup', function() {
-module.exports = __webpack_require__(/*! ./pages/signup.js */"./pages/signup.js");
+__NEXT_REGISTER_PAGE('/reset', function() {
+module.exports = __webpack_require__(/*! ./pages/reset.js */"./pages/reset.js");
 
 return { page: module.exports.default }});
 
@@ -21157,5 +20690,5 @@ module.exports = dll_18682c416555df0bf0b9;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]));;
-//# sourceMappingURL=signup.js.map
+},[[5,"static/runtime/webpack.js"]]]));;
+//# sourceMappingURL=reset.js.map
