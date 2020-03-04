@@ -1,1 +1,6 @@
 Pagination video 23 @ 2:00 -> orderBy: createdAt_DESC
+
+add prettier
+
+was attached to permissions on datamodel.graphql
+@scalarList(strategy: RELATION)
