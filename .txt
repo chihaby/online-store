@@ -2,5 +2,6 @@ Pagination video 23 @ 2:00 -> orderBy: createdAt_DESC
 
 add prettier
 
-was attached to permissions on datamodel.graphql
-@scalarList(strategy: RELATION)
+error with permission on how to set an ADMIN to view table. 
+turned out to be a Prisma thing to go around it 
+is defaulting to ADMIN instead of USER on Mutaions.js line 64
