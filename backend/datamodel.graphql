@@ -15,14 +15,22 @@ type User {
   resetToken: String
   resetTokenExpiry: String
   permissions: [Permission] @scalarList(strategy: RELATION)
+  cart: [CartItem!]!
 }
 
 type Item {
-id: ID! @id
-title: String!
-description: String!
-image: String
-largeImage: String
-price: Int!
-user: User!
+  id: ID! @id
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+  user: User!
+}
+
+type CartItem {
+  id: ID! @id
+  quantity: Int! @default(value: 1)
+  item: Item! 
+  user: User!
 }
