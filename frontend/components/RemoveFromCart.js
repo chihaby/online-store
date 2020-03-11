@@ -24,7 +24,7 @@ const BigButton = styled.button`
 `;
 
 class RemoveFromCart extends React.Component {
-  static PropTypes = {
+  static propTypes = {
     id: PropTypes.string.isRequired,
   };
 
