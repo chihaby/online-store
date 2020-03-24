@@ -5,3 +5,5 @@ add prettier
 error with permission on how to set an ADMIN to view table. 
 turned out to be a Prisma thing to go around it 
 is defaulting to ADMIN instead of USER on Mutaions.js line 64
+
+add .env for stripe key
