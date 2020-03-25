@@ -92,7 +92,7 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       title: 'cool shoes',
       description: 'I love those shoes',
-      image: 'dog.jp',
+      image: 'dog.jpg',
       largeImage: 'large-dog.jpg',
       price: 5000
     });
