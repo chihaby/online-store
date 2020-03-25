@@ -30,8 +30,6 @@ function totalItems(cart) {
 class TakeMyMoney extends React.Component {
   onToken = async (res, createOrder) => {
     NProgress.start();
-    console.log('ON token called')
-    console.log(res.id)
     // manually call the mutation once we have the stripe token
     const order = await createOrder({
       variables: {
