@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import styled from "styled-components";
 
 const AnimationStyles = styled.span`
   position: relative;
@@ -19,7 +19,7 @@ const AnimationStyles = styled.span`
   }
   .count-exit {
     top: 0;
-    position: absolute; 
+    position: absolute;
     transform: rotateX(0);
   }
   .count-exit-active {
@@ -27,8 +27,8 @@ const AnimationStyles = styled.span`
   }
 `;
 
-const Dot = styled.div `
-  background: ${props => props.theme.red};
+const Dot = styled.div`
+  background: ${(props) => props.theme.red};
   color: white;
   border-radius: 50%;
   padding: 0.5rem;
@@ -36,7 +36,7 @@ const Dot = styled.div `
   min-width: 3rem;
   margin-left: 1rem;
   font-weight: 100;
-  font-feature-settings: 'tnum';
+  font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
 `;
 
@@ -49,7 +49,7 @@ const CartCount = ({ count }) => (
         classNames="count"
         key={count}
         timeout={{ enter: 800, exit: 800 }}
-        >   
+      >
         <Dot>{count}</Dot>
       </CSSTransition>
     </TransitionGroup>

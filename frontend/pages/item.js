@@ -1,10 +1,9 @@
-import SingleItem from '../components/SingleItem';
+import SingleItem from "../components/SingleItem";
 
-
-const Item = props => (
-    <div>
-        <SingleItem id={props.query.id}/>
-    </div>
+const Item = (props) => (
+  <div>
+    <SingleItem id={props.query.id} />
+  </div>
 );
 
-export default Item; 
+export default Item;

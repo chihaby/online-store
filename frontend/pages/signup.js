@@ -1,8 +1,7 @@
-import Signup from '../components/Signup';
-import Signin from '../components/Signin';
-import RequestReset from '../components/RequestReset';
-import styled from 'styled-components';
-
+import Signup from "../components/Signup";
+import Signin from "../components/Signin";
+import RequestReset from "../components/RequestReset";
+import styled from "styled-components";
 
 const Columns = styled.div`
   display: grid;
@@ -10,12 +9,12 @@ const Columns = styled.div`
   grid-gap: 20px;
 `;
 
-const SingupPage = props => (
+const SingupPage = (props) => (
   <Columns>
     <Signup />
     <Signin />
     <RequestReset />
   </Columns>
-)
+);
 
 export default SingupPage;

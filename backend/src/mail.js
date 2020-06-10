@@ -1,15 +1,15 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const transport = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT, 
+  port: process.env.MAIL_PORT,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
 });
 
-const makeANiceEmail = text => `
+const makeANiceEmail = (text) => `
   <div className="email" style="
     border: 1px solid black;
     padding: 20px;
@@ -24,4 +24,4 @@ const makeANiceEmail = text => `
 `;
 
 exports.transport = transport;
-exports.makeANiceEmail= makeANiceEmail;
+exports.makeANiceEmail = makeANiceEmail;
